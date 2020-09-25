@@ -1,0 +1,118 @@
+{% extends 'view/layout/base.html' %} {% block body %}
+
+{% for error in errors %}
+
+<div class="notification is-danger">{{error}}</div>
+{% endfor %} {% for message in messages %}
+<div class="notification is-success">{{message}}</div>
+
+{% endfor %}
+<nav class="level-right">
+    <div class="level-item">
+        <a href="/car/create" class="button is-primary is-large">
+            <span class="icon"><i class="fas fa-plus-circle"></i></span>
+            <span>Add</span>
+        </a>
+    </div>
+</nav>
+
+<div class="table-container">
+
+  <div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <article class="message is-warning">
+        <div class="message-header">
+          <p>Warning</p>
+          <button class="modal-cancel-button delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+          Are you sure you want to delete the car with id
+      </article>
+      <a href="/" class="modal-delete-button button is-danger">Yes, Delete</a>
+      <button href="/car" class="modal-cancel-button button is-dark">Cancel</button>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+    {% for car in data.cars %}
+    <div class="columns is-vcentered is-marginless  ">
+      <figure class="image column is-one-quarter is-256x256">
+          <img src="{{car.imageSrc}}" >
+      </figure>
+        <div class="column">
+            <div class="content">
+                <p class="title is-3">{{car.brand}} {{car.model}} {{car.id}}</p>
+                <p class="subtitle is-5">
+                    <nav class="level">
+                        <div class="level-item has-text-centered">
+                          <div>
+                            <p class="heading">Seats</p>
+                            <p class="title">{{car.seats}}</p>
+                          </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                          <div>
+                            <p class="heading">Color</p>
+                            <p class="title">{{car.color}}</p>
+                          </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                          <div>
+                            <p class="heading">Year</p>
+                            <p class="title">{{car.year}}</p>
+                          </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                          <div>
+                            <p class="heading">Automatic Transmission</p>
+                            <p class="title">
+                                {% if car.hasAutomaticTransmission %}
+                                  <i class="fas fa-check"></i>
+                                {% else %}
+                                 <i class="fas fa-times"></i>
+                                {% endif %}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                              <p class="heading">Air conditioning</p>
+                              <p class="title">
+                                  {% if car.hasAirConditioning %}
+                                    <i class="fas fa-check"></i>
+                                  {% else %}
+                                   <i class="fas fa-times"></i>
+                                  {% endif %}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="level-item has-text-centered">
+                            <div>
+                              <p class="heading">Price</p>
+                              <p class="title">
+                                  ${{car.price}}
+                              </p>
+                            </div>
+                          </div>
+                      </nav>
+                </p>
+            </div>
+        </div>
+        {% if admin %}
+        <div class="column is-narrow">
+          <div>
+              <button class="delete action-delete" data-id="{{car.id}}" data-name="{{car.brand}} {{car.model}}">
+              </button>
+            </div>
+          <div>
+            <a href="/car/view/{{car.id}}"><i class="fas fa-pen"></i></a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+</div>
+{% endblock %} {% block footerScripts %}
+<script src="/public/js/car.index.js"></script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'view/layout/base.html' %} {% block body %}
+
+{% for error in errors %}
+
+<div class="notification is-danger">{{error}}</div>
+{% endfor %} {% for message in messages %}
+<div class="notification is-success">{{message}}</div>
+
+{% endfor %}
+<nav class="level-right">
+    <div class="level-item">
+        <a href="/rental/create" class="button is-primary is-large">
+            <span class="icon"><i class="fas fa-plus-circle"></i></span>
+            <span>Add</span>
+        </a>
+    </div>
+</nav>
+
+<div class="table-container">
+
+  <div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <article class="message is-warning">
+        <div class="message-header">
+          <p>Warning</p>
+          <button class="modal-cancel-button delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+          Are you sure you want to delete the Rental with id
+      </article>
+      <a href="/" class="modal-delete-button button is-danger">Yes, Delete</a>
+      <button href="/rental" class="modal-cancel-button button is-dark">Cancel</button>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+    {% for rental in data.rentals %}
+    <div class="columns is-vcentered is-marginless  ">
+      <figure class="image is-128x128">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" >
+      </figure>
+        <div class="column">
+            <div class="content">
+                <p class="subtitle is-5">
+                    <nav class="level">
+
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">Customer Id</p>
+                          <p class="title">{{rental.customerId}}</p>
+                        </div>
+                      </div>
+
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">Car Id</p>
+                          <p class="title">{{rental.carId}}</p>
+                        </div>
+                      </div>
+
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">Start Date</p>
+                          <p class="title">{{rental.startDateForInput}}</p>
+                        </div>
+                      </div>
+
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">End Date</p>
+                          <p class="title">{{rental.endDateForInput}}</p>
+                        </div>
+                      </div>
+
+                      </nav>
+                </p>
+            </div>
+        </div>
+        {% if admin %}
+        <div class="column is-narrow">
+          <div>
+              <button class="delete action-delete" data-id="{{rental.id}}" data-name="">
+              </button>
+            </div>
+          <div>
+            <a href="/rental/view/{{rental.id}}"><i class="fas fa-pen"></i></a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+</div>
+{% endblock %} {% block footerScripts %}
+<script src="/public/js/rental.index.js"></script>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends 'view/layout/base.html' %} {% block body %} {% set car = data.car %}
+
+<div class="level-left">
+    <div class="level-item">
+        <h1 class="title is-1">
+            {{"Editing car ID: " + car.id if car.id else "New Car"}}
+        </h1>
+    </div>
+    <div class="level-item">
+        <span><a class="button is-dark" href="/car">Cancel</a></span>
+    </div>
+</div>
+
+{% if car.imageSrc %}
+<img src="{{car.imageSrc}}" alt="car-image" />
+{% endif %}
+<hr />
+
+<form action="/car/save" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{{car.id}}" readonly />
+
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Brand</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="brand"
+                    placeholder="Toyota"
+                    value="{{car.brand}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Model</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="model"
+                    placeholder="Yaris"
+                    value="{{car.model}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Seats</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="seats"
+                    placeholder="4"
+                    value="{{car.seats}}"
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Color</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="color"
+                    placeholder="Red"
+                    value="{{car.color}}"
+                />
+            </div>
+        </div>
+    </nav>
+
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Year</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="year"
+                    placeholder="2018"
+                    value="{{car.year}}"
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Kms</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="kms"
+                    placeholder="273"
+                    value="{{car.kms}}"
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Automatic Transmission</p>
+                <input type="checkbox" name="has-automatic-transmission"
+                value="{{1 if car.hasAutomaticTransmission else 0}}" {{
+                "checked" if car.hasAutomaticTransmission }} />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Air Conditioning</p>
+                <input type="checkbox" name="has-air-conditioning" value="{{1 if
+                car.hasAirConditioning else 0}}" {{ "checked" if
+                car.hasAirConditioning }} />
+            </div>
+        </div>
+    </nav>
+
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Price</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="number"
+                    name="price"
+                    step="any"
+                    placeholder="{{car.price}}"
+                    value="{{car.price}}"
+                    required
+                />
+            </div>
+        </div>
+    </nav>
+
+    <div class="field">
+        <label class="label">Image</label>
+        <div class="control has-icons-left">
+            <input class="input" type="file" name="image-src" />
+            <span class="icon is-small is-left">
+                <i class="fas fa-shield-alt"></i>
+            </span>
+        </div>
+    </div>
+
+    <input type="submit" class="button is-primary is-large" value="Save" />
+    <hr />
+</form>
+{% endblock %}

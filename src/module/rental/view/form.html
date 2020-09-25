@@ -1,0 +1,291 @@
+{% extends 'view/layout/base.html' %} {% block body %} {% set rental =
+data.rental %}{% set car = data.car %}{% set customer = data.customer %}
+
+<div class="level-left">
+    <div class="level-item">
+        <h1 class="title is-1">
+            {{"Editing Rental with ID: " + rental.id if rental.id else "New
+            Rental"}}
+        </h1>
+    </div>
+</div>
+<hr />
+
+<button class="button is-primary show-customer-info">Show Customer Info</button>
+
+<div class="customer-info-container is-hidden">
+<h2 class="title is-2">Customer Info</h2>
+<hr class="is-divider">
+
+<div class="columns is-vcentered is-marginless">
+      <div class="column">
+          <div class="content">
+            <p class="subtitle is-5">
+                <nav class="level">
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">Id</p>
+                        <p class="title">{{customer.id}}</p>
+                      </div>
+                    </div>
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">First Names</p>
+                        <p class="title">{{customer.firstNames}}</p>
+                      </div>
+                    </div>
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">Last Names</p>
+                        <p class="title">{{customer.lastNames}}</p>
+                      </div>
+                    </div>
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">Nationality</p>
+                          <p class="title">
+                              {{customer.nationality}}
+                          </p>
+                        </div>
+                      </div>
+                  </nav>
+            </p>
+              <p class="subtitle is-5">
+                  <nav class="level">
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">Phone</p>
+                          <p class="title">{{customer.phone}}</p>
+                        </div>
+                      </div>
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">Email</p>
+                          <p class="title">{{customer.email}}</p>
+                        </div>
+                      </div>
+                      <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">Address</p>
+                          <p class="title">{{customer.address}}</p>
+                        </div>
+                      </div>
+                        <div class="level-item has-text-centered">
+                          <div>
+                            <p class="heading">document number</p>
+                            <p class="title">
+                                {{customer.documentNumber}}
+                            </p>
+                          </div>
+                        </div>
+                    </nav>
+              </p>
+          </div>
+      </div>
+    </div>
+</div>
+
+<button class="button is-primary show-car-info">Show Car Info</button>
+<div class="car-info-container is-hidden">
+    <h2 class="title is-2">Car Info</h2>
+    <div class="is-divider" ></div>
+
+    <div class="columns is-vcentered is-marginless  ">
+        <div class="column">
+            <div class="content">
+                <p class="subtitle is-5">
+                    <nav class="level">
+                        <div class="level-item has-text-centered">
+                            <div>
+                            <p class="heading">ID</p>
+                            <p class="title">{{car.id}}</p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                            <p class="heading">Brand</p>
+                            <p class="title">{{car.brand}}</p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                            <p class="heading">Model</p>
+                            <p class="title">{{car.model}}</p>
+                            </div>
+                        </div>
+                    
+                        <div class="level-item has-text-centered">
+                            <div>
+                            <p class="heading">Price</p>
+                            <p class="title"> {{car.price}}
+                            </p>
+                            </div>
+                        </div>
+                        
+                        </nav>
+
+                        <nav class="level">
+                            <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Seats</p>
+                                <p class="title">{{car.seats}}</p>
+                            </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Color</p>
+                                <p class="title">{{car.color}}</p>
+                            </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Year</p>
+                                <p class="title">{{car.year}}</p>
+                            </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Automatic Transmission</p>
+                                <p class="title">
+                                    {% if car.hasAutomaticTransmission %}
+                                    <i class="fas fa-check"></i>
+                                    {% else %}
+                                    <i class="fas fa-times"></i>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                <p class="heading">Air conditioning</p>
+                                <p class="title">
+                                    {% if car.hasAirConditioning %}
+                                        <i class="fas fa-check"></i>
+                                    {% else %}
+                                    <i class="fas fa-times"></i>
+                                    {% endif %}
+                                </p>
+                                </div>
+                            </div>
+                        </nav>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<form action="/rental/save" method="POST">
+    <input type="hidden" name="id" value="{{rental.id}}" readonly />
+
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Customer Id</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="customer-id"
+                    placeholder="17"
+                    value="{{rental.customerId}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Car Id</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="car-id"
+                    placeholder="3"
+                    value="{{rental.carId}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Car Price(day)</p>
+                <input
+                    class="input is-rounded has-text-centered car-price-day"
+                    type="text"
+                    name="car-price-per-day"
+                    placeholder="39"
+                    value="{{rental.carPricePerDay}}"
+                    required
+                />
+            </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Car Price(total)</p>
+                <input
+                    class="input is-rounded has-text-centered car-total-price"
+                    type="text"
+                    name="car-price-total"
+                    placeholder="493"
+                    value="{{rental.carPriceTotal}}"
+                    readonly
+                />
+            </div>
+        </div>
+    </nav>
+
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Start Date</p>
+                <input
+                    class="input is-rounded has-text-centered start-date-input"
+                    type="date"
+                    name="start-date"
+                    value="{{rental.startDateForInput}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">End Date</p>
+                <input
+                    class="input is-rounded has-text-centered end-date-input"
+                    type="date"
+                    name="end-date"
+                    value="{{rental.endDateForInput}}"
+                    required
+                />
+            </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Payment Type</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="payment-type"
+                    placeholder="Debit"
+                    value="{{rental.paymentType}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Is Paid</p>
+                <input type="checkbox" name="is-paid" value="{{1 if
+                rental.isPaid else 0}}" {{ "checked" if rental.isPaid }} />
+            </div>
+        </div>
+    </nav>
+
+    <input type="submit" class="button is-primary is-large" value="Save" />
+    <span><a class="button is-dark is-large" href="/rental">Cancel</a></span>
+    <hr />
+</form>
+<script src="/public/js/rental.form.js"></script>
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends 'view/layout/base.html' %} {% block body %} {% set customer =
+data.customer %}
+
+<div class="level-left">
+    <div class="level-item">
+        <h1 class="title is-1">
+            {{"Editing customer with ID: " + customer.id if customer.id else
+            "New Customer"}}
+        </h1>
+    </div>
+    <div class="level-item">
+        <span><a class="button is-dark" href="/customer">Cancel</a></span>
+    </div>
+</div>
+<hr />
+
+<form action="/customer/save" method="POST">
+    <input type="hidden" name="id" value="{{customer.id}}" readonly />
+
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Fist Names</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="fist-names"
+                    placeholder="Jhon"
+                    value="{{customer.firstNames}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Last Names</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="last-names"
+                    placeholder="Locke"
+                    value="{{customer.lastNames}}"
+                    required
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">document Type</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="document-type"
+                    placeholder="DNI"
+                    value="{{customer.documentType}}"
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Document Number</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="document-number"
+                    placeholder="29485767"
+                    value="{{customer.documentNumber}}"
+                />
+            </div>
+        </div>
+    </nav>
+
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Nationality</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="nationality"
+                    placeholder="British"
+                    value="{{customer.nationality}}"
+                />
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Address</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="address"
+                    placeholder="Westminster 234"
+                    value="{{customer.address}}"
+                />
+            </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Phone</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="phone"
+                    placeholder="28394859"
+                    value="{{customer.phone}}"
+                />
+            </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Email</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="text"
+                    name="email"
+                    placeholder="jhonLocke@gmail.com"
+                    value="{{customer.email}}"
+                />
+            </div>
+        </div>
+    </nav>
+    <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Birth Date</p>
+                <input
+                    class="input is-rounded has-text-centered"
+                    type="date"
+                    name="birth-date"
+                    max="2002-12-31"
+                    value="{{customer.birthDate}}"
+                    required
+                />
+            </div>
+        </div>
+    </nav>
+
+    <input type="submit" class="button is-primary is-large" value="Save" />
+    <hr />
+</form>
+{% endblock %}

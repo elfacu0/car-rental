@@ -1,0 +1,123 @@
+const { fromDataToEntity } = require('../mapper/rentalMapper');
+const RentalIdNotDefinedError = require('./error/rentalIdNotDefinedError');
+const AbstractController = require('../../abstractController');
+
+module.exports = class RentalController extends AbstractController {
+    /**
+     * @param {import('../service/rentalService')} rentalService
+     */
+    constructor(rentalService, customerService, carService) {
+        super();
+        this.ROUTE_BASE = '/rental';
+        this.rentalService = rentalService;
+        this.customerService = customerService;
+        this.carService = carService;
+    }
+
+    /**
+     * @param {import('express').Application} app
+     */
+    configureRoutes(app) {
+        const ROUTE = this.ROUTE_BASE;
+
+        // Nota: el `bind` es necesario porque estamos atando el callback a una función miembro de esta clase
+        // y no a la clase en si.
+        // Al hacer `bind` nos aseguramos que "this" dentro de `create` sea el controlador.
+        app.get(`${ROUTE}/create`, this.create.bind(this));
+        app.get(`${ROUTE}`, this.index.bind(this));
+        app.get(`${ROUTE}/view/:id`, this.view.bind(this));
+        app.post(`${ROUTE}/save`, this.save.bind(this));
+        app.get(`${ROUTE}/delete/:id`, this.delete.bind(this));
+    }
+
+    /**
+     * @param {import('express').Request} req
+     * @param {import('express').Response} res
+     */
+    async index(req, res) {
+        const rentals = await this.rentalService.getAll();
+        const { errors, messages } = req.session;
+        res.render('rental/view/index.html', {
+            data: { rentals },
+            admin: true,
+            messages,
+            errors,
+        });
+        req.session.errors = [];
+        req.session.messages = [];
+    }
+
+    /**
+     * @param {import('express').Request} req
+     * @param {import('express').Response} res
+     */
+    async create(req, res) {
+        const customers = await this.customerService.getAll();
+        const cars = await this.carService.getAll();
+        res.render('rental/view/form.html', { data: { customers, cars } });
+    }
+
+    /**
+     * @param {import('express').Request} req
+     * @param {import('express').Response} res
+     */
+    async view(req, res) {
+        const { id } = req.params;
+
+        if (!id) {
+            throw new RentalIdNotDefinedError();
+        }
+
+        try {
+            const rental = await this.rentalService.getById(id);
+            const customer = await this.customerService.getById(
+                rental.customerId
+            );
+            const car = await this.carService.getById(rental.carId);
+            res.render('rental/view/form.html', {
+                data: { rental, customer, car },
+            });
+        } catch (e) {
+            req.session.errors = [e.message];
+            res.redirect(this.ROUTE_BASE);
+        }
+    }
+
+    /**
+     * @param {import('express').Request} req
+     * @param {import('express').Response} res
+     */
+    async save(req, res) {
+        try {
+            const rental = fromDataToEntity(req.body);
+            const savedRental = await this.rentalService.save(rental);
+            if (rental.id) {
+                req.session.messages = [`rental with id ${rental.id} updated`];
+            } else {
+                req.session.messages = [
+                    `Added rental with id ${savedRental.id} `,
+                ];
+            }
+            res.redirect(this.ROUTE_BASE);
+        } catch (e) {
+            req.session.errors = [e.message, e.stack];
+            res.redirect(this.ROUTE_BASE);
+        }
+    }
+
+    /**
+     * @param {import('express').Request} req
+     * @param {import('express').Response} res
+     */
+    async delete(req, res) {
+        try {
+            const { id } = req.params;
+            const rental = await this.rentalService.getById(id);
+            await this.rentalService.delete(rental);
+            req.session.messages = [`Rental deleted with id: ${id}`];
+        } catch (e) {
+            req.session.errors = [e.message];
+        }
+        res.redirect(this.ROUTE_BASE);
+    }
+};

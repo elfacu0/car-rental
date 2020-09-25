@@ -1,0 +1,13 @@
+.is-256x256 img {
+    width: 280px;
+    height: 180px;
+}
+
+.is-fullvh {
+    min-height: 100vh;
+}
+
+.is-divider {
+    border-top: 2px solid #bbb;
+    border-radius: 5px;
+}
