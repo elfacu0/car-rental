@@ -212,6 +212,12 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
                 <input
                     class="input is-rounded has-text-centered car-price-day"
                     type="text"
+                    value="{{rental.carPricePerDayForInput}}"
+                    readonly
+                />
+                <input
+                    class="input is-hidden"
+                    type="text"
                     name="car-price-per-day"
                     value="{{rental.carPricePerDay}}"
                     readonly
@@ -221,12 +227,12 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
 
         <div class="level-item has-text-centered">
             <div>
-                <p class="heading">Car Price(total)</p>
+                <p class="heading">Total Price</p>
                 <input
-                    class="input is-rounded has-text-centered car-total-price"
+                    class="input is-rounded has-text-centered total-price"
                     type="text"
-                    name="car-price-total"
-                    value="{{rental.carPriceTotal}}"
+                    name="total-price"
+                    value="{{rental.totalPrice}}"
                     readonly
                 />
             </div>

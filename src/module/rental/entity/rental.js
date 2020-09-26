@@ -1,3 +1,4 @@
+const moment = require('moment');
 module.exports = class Rental {
     constructor({
         id,
@@ -6,7 +7,7 @@ module.exports = class Rental {
         carPricePerDay,
         startDate,
         endDate,
-        carPriceTotal,
+        totalPrice,
         paymentType,
         isPaid,
     }) {
@@ -14,11 +15,12 @@ module.exports = class Rental {
         this.carId = carId;
         this.customerId = customerId;
         this.carPricePerDay = carPricePerDay;
+        this.carPricePerDayForInput = this.fromCentsToUsd(carPricePerDay);
         this.startDate = this.convertToDate(startDate);
         this.endDate = this.convertToDate(endDate);
         this.startDateForInput = this.convertDateToString(this.startDate);
         this.endDateForInput = this.convertDateToString(this.endDate);
-        this.carPriceTotal = carPriceTotal;
+        this.totalPrice = this.calculateTotalPrice(totalPrice);
         this.paymentType = paymentType;
         this.isPaid = isPaid;
     }
@@ -37,5 +39,21 @@ module.exports = class Rental {
             return new Date(date[0], date[1], date[2]);
         }
         return new Date(date);
+    }
+
+    calculateTotalPrice(price) {
+        if (price == 0) {
+            let start = moment(this.startDate);
+            let end = moment(this.endDate);
+            let daysRented = end.diff(start, 'days') + 1;
+            let totalPrice = daysRented * this.carPricePerDay;
+            return totalPrice;
+        } else {
+            return price;
+        }
+    }
+
+    fromCentsToUsd(price) {
+        return price * 100;
     }
 };

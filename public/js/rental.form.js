@@ -5,7 +5,7 @@ const carContainer = document.querySelector('.car-info-container');
 const startDateInput = document.querySelector('.start-date-input');
 const endDateInput = document.querySelector('.end-date-input');
 const PricePerDayInput = document.querySelector('.car-price-day');
-const totalPriceInput = document.querySelector('.car-total-price');
+const totalPriceInput = document.querySelector('.total-price');
 
 function setShowInfo() {
     showCarButtom.addEventListener('click', () => {

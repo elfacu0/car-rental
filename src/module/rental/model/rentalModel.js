@@ -42,7 +42,7 @@ module.exports = class rentalModel extends Model {
                 endDate: {
                     type: DataTypes.DATE,
                 },
-                carPriceTotal: {
+                totalPrice: {
                     type: DataTypes.NUMBER,
                 },
                 paymentType: {

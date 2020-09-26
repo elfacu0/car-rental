@@ -61,6 +61,7 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
      */
     async getAll() {
         const rentals = await this.rentalModel.findAll();
+        console.log(rentals);
         return rentals.map(fromModelToEntity);
     }
 };

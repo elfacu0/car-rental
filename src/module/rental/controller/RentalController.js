@@ -58,7 +58,8 @@ module.exports = class RentalController extends AbstractController {
         if (id) {
             car = await this.carService.getById(id);
             rental.carId = id;
-            rental.carPricePerDay = car.price;
+            rental.carPricePerDayForInput = car.price;
+            rental.carPricePerDay = car.priceInCents;
         }
         const customers = await this.customerService.getAll();
         const cars = await this.carService.getAll();

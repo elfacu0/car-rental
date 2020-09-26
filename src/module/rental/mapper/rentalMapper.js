@@ -13,18 +13,18 @@ function fromDataToEntity({
     'car-price-per-day': carPricePerDay,
     'start-date': startDate,
     'end-date': endDate,
-    'car-price-total': carPriceTotal,
     'payment-type': paymentType,
     'is-paid': isPaid,
 }) {
+    const totalPrice = 0;
     return new Rental({
         id: Number(id),
         carId: Number(carId),
         customerId: Number(customerId),
-        carPricePerDay,
+        carPricePerDay: Number(carPricePerDay),
         startDate,
         endDate,
-        carPriceTotal,
+        totalPrice,
         paymentType,
         isPaid,
     });
