@@ -52,8 +52,8 @@ function setShowTotalPrice() {
 
 function changeMinEndDate() {
     let startDate = startDateInput.value.split('-');
-    let dd = startDate[2];
-    let mm = startDate[1]; //January is 0!
+    let dd = Number(startDate[2]);
+    let mm = Number(startDate[1]);
     let yyyy = startDate[0];
     if (dd < 10) {
         dd = '0' + dd;

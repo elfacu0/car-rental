@@ -23,7 +23,7 @@ module.exports = class RentalController extends AbstractController {
         // Nota: el `bind` es necesario porque estamos atando el callback a una función miembro de esta clase
         // y no a la clase en si.
         // Al hacer `bind` nos aseguramos que "this" dentro de `create` sea el controlador.
-        app.get(`${ROUTE}/create`, this.create.bind(this));
+        app.get(`${ROUTE}/create/:id?`, this.create.bind(this));
         app.get(`${ROUTE}`, this.index.bind(this));
         app.get(`${ROUTE}/view/:id`, this.view.bind(this));
         app.post(`${ROUTE}/save`, this.save.bind(this));
@@ -52,9 +52,19 @@ module.exports = class RentalController extends AbstractController {
      * @param {import('express').Response} res
      */
     async create(req, res) {
+        const { id } = req.params;
+        let car = {};
+        let rental = {};
+        if (id) {
+            car = await this.carService.getById(id);
+            rental.carId = id;
+            rental.carPricePerDay = car.price;
+        }
         const customers = await this.customerService.getAll();
         const cars = await this.carService.getAll();
-        res.render('rental/view/form.html', { data: { customers, cars } });
+        res.render('rental/view/form.html', {
+            data: { car, rental, customers, cars },
+        });
     }
 
     /**
