@@ -58,7 +58,7 @@ data.customer %}
                 <p class="heading">Document Number</p>
                 <input
                     class="input is-rounded has-text-centered"
-                    type="text"
+                    type="number"
                     name="document-number"
                     placeholder="29485767"
                     value="{{customer.documentNumber}}"
@@ -71,15 +71,8 @@ data.customer %}
         <div class="level-item has-text-centered">
             <div>
                 <p class="heading">Nationality</p>
-                <!-- <input
-                    class="input is-rounded has-text-centered"
-                    type="text"
-                    name="nationality"
-                    placeholder="British"
-                    value="{{customer.nationality}}"
-                /> -->
                 <div class="select is-rounded">
-                    <select name="nationality">
+                    <select name="nationality" required>
                         <option
                             disabled
                             selected
@@ -110,7 +103,7 @@ data.customer %}
                 <p class="heading">Phone</p>
                 <input
                     class="input is-rounded has-text-centered"
-                    type="text"
+                    type="number"
                     name="phone"
                     placeholder="28394859"
                     value="{{customer.phone}}"
