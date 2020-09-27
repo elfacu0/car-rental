@@ -71,13 +71,25 @@ data.customer %}
         <div class="level-item has-text-centered">
             <div>
                 <p class="heading">Nationality</p>
-                <input
+                <!-- <input
                     class="input is-rounded has-text-centered"
                     type="text"
                     name="nationality"
                     placeholder="British"
                     value="{{customer.nationality}}"
-                />
+                /> -->
+                <div class="select is-rounded">
+                    <select name="nationality">
+                        <option
+                            disabled
+                            selected
+                            value="{{customer.nationality}}"
+                        >
+                            {{customer.nationality if customer.nationality else
+                            "Select Nationality"}}
+                        </option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="level-item has-text-centered">
@@ -111,7 +123,7 @@ data.customer %}
                 <p class="heading">Email</p>
                 <input
                     class="input is-rounded has-text-centered"
-                    type="text"
+                    type="email"
                     name="email"
                     placeholder="jhonLocke@gmail.com"
                     value="{{customer.email}}"
@@ -139,4 +151,5 @@ data.customer %}
     <span><a class="button is-dark is-large" href="/customer">Cancel</a></span>
     <hr />
 </form>
+<script src="/public/js/customer.form.nationality.js"></script>
 {% endblock %}
