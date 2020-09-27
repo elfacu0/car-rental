@@ -72,7 +72,7 @@ function changeTotalPrice() {
     let daysRented = end.diff(start, 'days');
     const pricePerDay = PricePerDayInput.value;
     let totalPrice = daysRented * pricePerDay;
-    totalPriceInput.value = totalPrice;
+    totalPriceInput.value = totalPrice.toFixed(2);
 }
 
 setShowInfo();

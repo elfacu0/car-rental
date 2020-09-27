@@ -21,6 +21,7 @@ module.exports = class Rental {
         this.startDateForInput = this.convertDateToString(this.startDate);
         this.endDateForInput = this.convertDateToString(this.endDate);
         this.totalPrice = this.calculateTotalPrice(totalPrice);
+        this.totalPriceForInput = this.fromCentsToUsd(this.totalPrice);
         this.paymentType = paymentType;
         this.isPaid = isPaid;
     }
@@ -54,6 +55,6 @@ module.exports = class Rental {
     }
 
     fromCentsToUsd(price) {
-        return price * 100;
+        return price / 100;
     }
 };
