@@ -197,7 +197,7 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
                 <p class="heading">Customer Id</p>
                 <input
                     class="input is-rounded has-text-centered"
-                    type="text"
+                    type="number"
                     name="customer-id"
                     placeholder="17"
                     value="{{rental.customerId}}"
@@ -210,7 +210,7 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
                 <p class="heading">Car Id</p>
                 <input
                     class="input is-rounded has-text-centered"
-                    type="text"
+                    type="number"
                     name="car-id"
                     placeholder="3"
                     value="{{rental.carId}}"
@@ -223,7 +223,7 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
                 <p class="heading">Car Price(day)</p>
                 <input
                     class="input is-rounded has-text-centered car-price-day"
-                    type="text"
+                    type="number"
                     value="{{rental.carPricePerDayForInput}}"
                     readonly
                 />
@@ -242,7 +242,7 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
                 <p class="heading">Total Price</p>
                 <input
                     class="input is-rounded has-text-centered total-price"
-                    type="text"
+                    type="number"
                     name="total-price"
                     value="{{rental.totalPriceForInput}}"
                     readonly
