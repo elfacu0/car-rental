@@ -176,6 +176,18 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
 </div>
 <hr />
 
+<div class="customer-search autocomplete ">
+    <p >Search Customer</p>
+    <input class="input is-primary customer-search" type="text">
+    <div class="autocomplete-items">
+        {% for customer in data.customers %}
+            <div class="customer-item" data-id="{{customer.id}}">{{customer.firstNames}} {{customer.lastNames}}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<hr />
+
 <form action="/rental/save" method="POST">
     <input type="hidden" name="id" value="{{rental.id}}" readonly />
 
@@ -291,5 +303,6 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
     <span><a class="button is-dark is-large" href="/rental">Cancel</a></span>
     <hr />
 </form>
+<script src="/public/js/rental.form.search.js"></script>
 <script src="/public/js/rental.form.js"></script>
 {% endblock %}

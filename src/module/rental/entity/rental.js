@@ -46,7 +46,7 @@ module.exports = class Rental {
         if (price == 0) {
             let start = moment(this.startDate);
             let end = moment(this.endDate);
-            let daysRented = end.diff(start, 'days') + 1;
+            let daysRented = end.diff(start, 'days');
             let totalPrice = daysRented * this.carPricePerDay;
             return totalPrice;
         } else {
