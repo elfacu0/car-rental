@@ -4,8 +4,9 @@ const resultsContainer = document.querySelector('.autocomplete-items');
 let results = resultsContainer.querySelectorAll('.customer-item');
 
 customerInput.addEventListener('input', (e) => {
-    const word = e.target.value;
-    let regex = new RegExp(`\\${word}+\\w`, 'gi');
+    const word = e.target.value || '~';
+    let regex = new RegExp('' + word + '+', 'gi');
+    console.log(regex);
     results.forEach((result) => {
         if (regex.test(result.innerHTML)) {
             result.className = '';
@@ -23,7 +24,7 @@ customerInput.addEventListener('input', (e) => {
     resultsContainer.classList.remove('is-hidden');
 })();
 
-function setCustomerId(e) {
+function setCustomerId() {
     const id = this.getAttribute('data-id');
     customerIdInput.value = id;
 }
