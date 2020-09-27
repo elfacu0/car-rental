@@ -19,6 +19,7 @@ customerInput.addEventListener('input', (e) => {
         result.className = 'is-hidden';
         result.addEventListener('click', setCustomerId);
     });
+    resultsContainer.classList.remove('is-hidden');
 })();
 
 function setCustomerId(e) {
