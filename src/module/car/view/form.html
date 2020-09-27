@@ -6,9 +6,6 @@
             {{"Editing car ID: " + car.id if car.id else "New Car"}}
         </h1>
     </div>
-    <div class="level-item">
-        <span><a class="button is-dark" href="/car">Cancel</a></span>
-    </div>
 </div>
 
 {% if car.imageSrc %}
@@ -143,6 +140,7 @@
     </div>
 
     <input type="submit" class="button is-primary is-large" value="Save" />
+    <span><a class="button is-dark is-large" href="/car">Cancel</a></span>
     <hr />
 </form>
 {% endblock %}

@@ -179,7 +179,7 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
 <div class="customer-search autocomplete ">
     <p >Search Customer</p>
     <input class="input is-primary customer-search" type="text">
-    <div class="autocomplete-items">
+    <div class="autocomplete-items is-hidden">
         {% for customer in data.customers %}
             <div class="customer-item" data-id="{{customer.id}}">{{customer.firstNames}} {{customer.lastNames}}</div>
         {% endfor %}

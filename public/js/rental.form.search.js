@@ -4,7 +4,8 @@ const resultsContainer = document.querySelector('.autocomplete-items');
 let results = resultsContainer.querySelectorAll('.customer-item');
 
 customerInput.addEventListener('input', (e) => {
-    let regex = new RegExp(`\\${e.target.value}+\\w`, 'gi');
+    const word = e.target.value;
+    let regex = new RegExp(`\\${word}+\\w`, 'gi');
     results.forEach((result) => {
         if (regex.test(result.innerHTML)) {
             result.className = '';
