@@ -17,6 +17,7 @@ module.exports = class rentalModel extends Model {
                 },
                 carId: {
                     type: DataTypes.INTEGER,
+                    allowNull: false,
                     references: {
                         model: {
                             tableName: 'cars',
@@ -26,6 +27,7 @@ module.exports = class rentalModel extends Model {
                 },
                 customerId: {
                     type: DataTypes.INTEGER,
+                    allowNull: false,
                     references: {
                         model: {
                             tableName: 'customers',
