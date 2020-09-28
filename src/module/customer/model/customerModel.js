@@ -68,7 +68,7 @@ module.exports = class customerModel extends Model {
     }
     /**
      *
-     * @param {import('../../renta/model/rentalModel')} rentalModel
+     * @param {import('../../rental/model/rentalModel')} rentalModel
      */
     static setupAssociations(rentalModel) {
         customerModel.hasOne(rentalModel, {
