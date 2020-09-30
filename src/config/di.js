@@ -80,25 +80,26 @@ function configureSession(container) {
  * @param {DIContainer} container
  */
 function configureCarModel(container) {
-    CarModel.setup(container.get('Sequelize'));
-    CarModel.setupAssociations(container.get('RentalModel'));
-    return CarModel;
+    return CarModel.setup(container.get('Sequelize'));
 }
 
 /**
  * @param {DIContainer} container
  */
 function configureCustomerModel(container) {
-    CustomerModel.setup(container.get('Sequelize'));
-    CustomerModel.setupAssociations(container.get('RentalModel'));
-    return CustomerModel;
+    return CustomerModel.setup(container.get('Sequelize'));
 }
 
 /**
  * @param {DIContainer} container
  */
 function configureRentalModel(container) {
-    return RentalModel.setup(container.get('Sequelize'));
+    RentalModel.setup(container.get('Sequelize'));
+    RentalModel.setupAssociations(
+        container.get('CustomerModel'),
+        container.get('CarModel')
+    );
+    return RentalModel;
 }
 
 /**
@@ -167,8 +168,8 @@ function addRentalModuleDefinitions(container) {
 module.exports = function configureDI() {
     const container = new DIContainer();
     addCommonDefinitions(container);
-    addRentalModuleDefinitions(container);
-    addCustomerModuleDefinitions(container);
     addCarModuleDefinitions(container);
+    addCustomerModuleDefinitions(container);
+    addRentalModuleDefinitions(container);
     return container;
 };

@@ -73,4 +73,14 @@ module.exports = class rentalModel extends Model {
 
         return rentalModel;
     }
+
+    /**
+     *
+     * @param {import('../../customer/model/customerModel')} customerModel
+     * @param {import('../../car/model/carModel')} carModel
+     */
+    static setupAssociations(customerModel, carModel) {
+        rentalModel.belongsTo(customerModel, { as: 'customer' });
+        rentalModel.belongsTo(carModel, { as: 'car' });
+    }
 };

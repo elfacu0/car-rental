@@ -48,7 +48,6 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
         const rentalModel = await this.rentalModel.findOne({
             where: { id },
         });
-
         if (!rentalModel) {
             throw new RentalNotFoundError(`rental with ${id} not found`);
         }

@@ -65,11 +65,4 @@ module.exports = class CarModel extends Model {
 
         return CarModel;
     }
-    /**
-     *
-     * @param {import('../../rental/model/rentalModel')} rentalModel
-     */
-    static setupAssociations(rentalModel) {
-        CarModel.hasOne(rentalModel, { foreignKey: 'car_id' });
-    }
 };
