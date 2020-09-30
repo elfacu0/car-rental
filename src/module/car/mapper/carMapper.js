@@ -23,9 +23,9 @@ function fromDataToEntity({
     'has-automatic-transmission': hasAutomaticTransmission,
     price,
 }) {
-    hasAirConditioning = !hasAirConditioning ? 0 : 1;
-    hasAutomaticTransmission = !hasAutomaticTransmission ? 0 : 1;
-    let priceInCents = fromUsdToCents(price);
+    hasAirConditioning = Boolean(hasAirConditioning);
+    hasAutomaticTransmission = Boolean(hasAutomaticTransmission);
+    const priceInCents = fromUsdToCents(price);
     return new Car({
         id: Number(id),
         imageSrc,

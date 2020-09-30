@@ -84,7 +84,6 @@ module.exports = class CarController extends AbstractController {
     async save(req, res) {
         try {
             const car = fromDataToEntity(req.body);
-            console.log(car);
             if (req.file) {
                 const { path } = req.file;
                 car.imageSrc = path;
