@@ -22,7 +22,6 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
         const buildOptions = { isNewRecord: !rental.id };
         rentalModel = this.rentalModel.build(rental, buildOptions);
         rentalModel = await rentalModel.save();
-        console.log(rentalModel);
         return fromModelToEntity(rentalModel);
     }
 
@@ -47,6 +46,7 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
     async getById(id) {
         const rentalModel = await this.rentalModel.findOne({
             where: { id },
+            // include: ['car', 'customer'],
         });
         if (!rentalModel) {
             throw new RentalNotFoundError(`rental with ${id} not found`);

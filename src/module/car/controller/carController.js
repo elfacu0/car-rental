@@ -73,7 +73,7 @@ module.exports = class CarController extends AbstractController {
             res.render('car/view/form.html', { data: { car } });
         } catch (e) {
             req.session.errors = [e.message];
-            res.redirect('/car');
+            res.redirect(this.ROUTE_BASE);
         }
     }
 
@@ -97,10 +97,10 @@ module.exports = class CarController extends AbstractController {
                     `Added car with id ${savedCar.id} (${savedCar.name})`,
                 ];
             }
-            res.redirect('/car');
+            res.redirect(this.ROUTE_BASE);
         } catch (e) {
             req.session.errors = [e.message, e.stack];
-            res.redirect('/car');
+            res.redirect(this.ROUTE_BASE);
         }
     }
 
@@ -119,6 +119,6 @@ module.exports = class CarController extends AbstractController {
         } catch (e) {
             req.session.errors = [e.message];
         }
-        res.redirect('/car');
+        res.redirect(this.ROUTE_BASE);
     }
 };

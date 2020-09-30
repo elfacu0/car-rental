@@ -68,7 +68,7 @@ module.exports = class CustomerController extends AbstractController {
             res.render('customer/view/form.html', { data: { customer } });
         } catch (e) {
             req.session.errors = [e.message];
-            res.redirect('/customer');
+            res.redirect(this.ROUTE_BASE);
         }
     }
 
@@ -90,10 +90,10 @@ module.exports = class CustomerController extends AbstractController {
                     `Added customer with id ${savedCustomer.id} (${savedCustomer.name})`,
                 ];
             }
-            res.redirect('/customer');
+            res.redirect(this.ROUTE_BASE);
         } catch (e) {
             req.session.errors = [e.message, e.stack];
-            res.redirect('/customer');
+            res.redirect(this.ROUTE_BASE);
         }
     }
 
@@ -110,6 +110,6 @@ module.exports = class CustomerController extends AbstractController {
         } catch (e) {
             req.session.errors = [e.message];
         }
-        res.redirect('/customer');
+        res.redirect(this.ROUTE_BASE);
     }
 };
