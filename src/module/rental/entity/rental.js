@@ -1,4 +1,5 @@
 const moment = require('moment');
+
 module.exports = class Rental {
     constructor({
         id,
@@ -10,6 +11,8 @@ module.exports = class Rental {
         totalPrice,
         paymentType,
         isPaid,
+        customer,
+        car,
     }) {
         this.id = id;
         this.carId = carId;
@@ -24,6 +27,14 @@ module.exports = class Rental {
         this.totalPriceForInput = this.fromCentsToUsd(this.totalPrice);
         this.paymentType = paymentType;
         this.isPaid = isPaid;
+        /**
+         * @type {import('../../customer/entity/customer');} this.Customer
+         */
+        this.Customer = customer;
+        /**
+         * @type {import('../../car/entity/car');} this.Car
+         */
+        this.Car = car;
     }
 
     convertDateToString(date) {

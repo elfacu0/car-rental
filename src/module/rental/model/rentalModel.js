@@ -1,12 +1,12 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
-module.exports = class rentalModel extends Model {
+module.exports = class RentalModel extends Model {
     /**
      * @param {import('sequelize').Sequelize} sequelizeInstance
-     * @returns {typeof rentalModel}
+     * @returns {typeof RentalModel}
      */
     static setup(sequelizeInstance) {
-        rentalModel.init(
+        RentalModel.init(
             {
                 id: {
                     type: DataTypes.INTEGER,
@@ -71,16 +71,16 @@ module.exports = class rentalModel extends Model {
             }
         );
 
-        return rentalModel;
+        return RentalModel;
     }
 
     /**
      *
-     * @param {import('../../customer/model/customerModel')} customerModel
-     * @param {import('../../car/model/carModel')} carModel
+     * @param {import('../../customer/model/CustomerModel')} customerModel
+     * @param {import('../../car/model/CarModel')} carModel
      */
     static setupAssociations(customerModel, carModel) {
-        rentalModel.belongsTo(customerModel, { as: 'customer' });
-        rentalModel.belongsTo(carModel, { as: 'car' });
+        RentalModel.belongsTo(customerModel, { as: 'customer' });
+        RentalModel.belongsTo(carModel, { as: 'car' });
     }
 };

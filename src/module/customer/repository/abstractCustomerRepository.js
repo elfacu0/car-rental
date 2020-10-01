@@ -5,7 +5,7 @@ const AbstractCustomerRepositoryError = require('./error/abstractCustomerReposit
 module.exports = class AbstractCustomerRepository {
     constructor() {
         if (new.target === AbstractCustomerRepository) {
-            throw new AbstractCustomerRepository(
+            throw new AbstractCustomerRepositoryError(
                 'Cant initialize abstract customer.'
             );
         }

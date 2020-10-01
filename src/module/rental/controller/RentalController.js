@@ -49,18 +49,18 @@ module.exports = class RentalController extends AbstractController {
      */
     async create(req, res) {
         const { id } = req.params;
-        let car = {};
+        let Car = {};
         let rental = {};
         if (id) {
-            car = await this.carService.getById(id);
+            Car = await this.carService.getById(id);
             rental.carId = id;
-            rental.carPricePerDayForInput = car.price;
-            rental.carPricePerDay = car.priceInCents;
+            rental.carPricePerDayForInput = Car.price;
+            rental.carPricePerDay = Car.priceInCents;
         }
+        rental.car = Car;
         const customers = await this.customerService.getAll();
-        const cars = await this.carService.getAll();
         res.render('rental/view/form.html', {
-            data: { car, rental, customers, cars },
+            data: { rental, customers },
         });
     }
 
@@ -77,12 +77,9 @@ module.exports = class RentalController extends AbstractController {
 
         try {
             const rental = await this.rentalService.getById(id);
-            const customer = await this.customerService.getById(
-                rental.customerId
-            );
-            const car = await this.carService.getById(rental.carId);
+            console.log(rental);
             res.render('rental/view/form.html', {
-                data: { rental, customer, car },
+                data: { rental },
             });
         } catch (e) {
             req.session.errors = [e.message];

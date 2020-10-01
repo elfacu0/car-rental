@@ -26,7 +26,7 @@ module.exports = class CustomerRepository extends AbstractCustomerRepository {
     }
 
     /**
-     * @param {import('../../entity/club')} customer
+     * @param {import('../../entity/customer')} customer
      * @returns {Boolean} devuelve true si se borró algo, false si no se borró nada.
      */
     async delete(customer) {
@@ -36,11 +36,13 @@ module.exports = class CustomerRepository extends AbstractCustomerRepository {
 
         let customerModel;
 
-        const buildOptions = { isNewRecord: !customer.id };
-        customer.isDeleted = 1;
+        const buildOptions = { isNewRecord: false };
+        customer.isDeleted =
+            customer.isDeleted === false ? true : customer.isDeleted;
         customerModel = this.customerModel.build(customer, buildOptions);
         customerModel = await customerModel.save();
-        return Boolean(fromModelToEntity(customerModel).id);
+        const deletedCustomer = fromModelToEntity(customerModel);
+        return Boolean(deletedCustomer.isDeleted);
     }
 
     /**

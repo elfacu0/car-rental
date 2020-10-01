@@ -5,7 +5,7 @@ const AbstractRentalRepositoryError = require('./error/abstractRentalRepositoryE
 module.exports = class AbstractRentalRepository {
     constructor() {
         if (new.target === AbstractRentalRepository) {
-            throw new AbstractRentalRepository(
+            throw new AbstractRentalRepositoryError(
                 'Cant initialize abstract Rental.'
             );
         }

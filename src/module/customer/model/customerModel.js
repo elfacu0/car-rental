@@ -1,12 +1,12 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
-module.exports = class customerModel extends Model {
+module.exports = class CustomerModel extends Model {
     /**
      * @param {import('sequelize').Sequelize} sequelizeInstance
-     * @returns {typeof customerModel}
+     * @returns {typeof CustomerModel}
      */
     static setup(sequelizeInstance) {
-        customerModel.init(
+        CustomerModel.init(
             {
                 id: {
                     type: DataTypes.INTEGER,
@@ -64,6 +64,6 @@ module.exports = class customerModel extends Model {
             }
         );
 
-        return customerModel;
+        return CustomerModel;
     }
 };

@@ -27,7 +27,7 @@ module.exports = class CarRepository extends AbstractCarRepository {
     }
 
     /**
-     * @param {import('../../entity/club')} car
+     * @param {import('../../entity/car')} car
      * @returns {Boolean} devuelve true si se borró algo, false si no se borró nada.
      */
     async delete(car) {

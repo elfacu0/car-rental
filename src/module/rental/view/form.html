@@ -1,5 +1,5 @@
 {% extends 'view/layout/base.html' %} {% block body %} {% set rental =
-data.rental %}{% set car = data.car %}{% set customer = data.customer %}
+data.rental %}{% set car = data.rental.Car %}{% set customer = data.rental.Customer %}
 
 <div class="level-left">
     <div class="level-item">
@@ -176,6 +176,7 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
 </div>
 <hr />
 
+{% if rental.id == undefined %}
 <div class="customer-search autocomplete ">
     <p >Search Customer</p>
     <input class="input is-primary customer-search" type="text">
@@ -185,7 +186,7 @@ data.rental %}{% set car = data.car %}{% set customer = data.customer %}
         {% endfor %}
     </div>
 </div>
-
+{% endif %}
 <hr />
 
 <form action="/rental/save" method="POST">

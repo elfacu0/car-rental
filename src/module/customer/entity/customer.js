@@ -12,7 +12,7 @@ module.exports = class Customer {
         birthDate,
         isDeleted,
     }) {
-        this.id = id;
+        this.id = Number(id);
         this.firstNames = firstNames;
         this.lastNames = lastNames;
         this.documentType = documentType;

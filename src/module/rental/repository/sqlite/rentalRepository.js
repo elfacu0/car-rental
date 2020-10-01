@@ -46,7 +46,7 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
     async getById(id) {
         const rentalModel = await this.rentalModel.findOne({
             where: { id },
-            // include: ['car', 'customer'],
+            include: ['car', 'customer'],
         });
         if (!rentalModel) {
             throw new RentalNotFoundError(`rental with ${id} not found`);

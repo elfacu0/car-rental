@@ -1,4 +1,6 @@
 const Rental = require('../entity/rental');
+const Customer = require('../../customer/entity/customer');
+const Car = require('../../car/entity/car');
 
 /**
  *
@@ -15,6 +17,8 @@ function fromDataToEntity({
     'end-date': endDate,
     'payment-type': paymentType,
     'is-paid': isPaid,
+    customer,
+    car,
 }) {
     const totalPrice = 0;
     return new Rental({
@@ -27,6 +31,8 @@ function fromDataToEntity({
         totalPrice,
         paymentType,
         isPaid,
+        customer: new Customer(customer),
+        car: new Car(car),
     });
 }
 
