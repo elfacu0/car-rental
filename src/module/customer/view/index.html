@@ -1,5 +1,5 @@
 {% extends 'view/layout/base.html' %} {% block body %}
-
+{% set customers = data.customers %}
 {% for error in errors %}
 
 <div class="notification is-danger">{{error}}</div>
@@ -35,7 +35,7 @@
     <button class="modal-close is-large" aria-label="close"></button>
   </div>
 
-    {% for customer in data.customers %}
+    {% for customer in customers %}
     <div class="columns is-vcentered is-marginless  ">
       <figure class="image is-128x128">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" >

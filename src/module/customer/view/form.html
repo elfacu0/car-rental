@@ -1,5 +1,5 @@
 {% extends 'view/layout/base.html' %} {% block body %} {% set customer =
-data.customer %}
+data.customer %} {% set rentals = data.rentals %}
 
 <div class="level-left">
     <div class="level-item">
@@ -148,5 +148,9 @@ data.customer %}
     <span><a class="button is-dark is-large" href="/customer">Cancel</a></span>
     <hr />
 </form>
+
+<h1 class="title is-1">Historical Rentals</h1>
+{% for rental in rentals %} {% endfor %}
+
 <script src="/public/js/customer.form.nationality.js"></script>
 {% endblock %}
