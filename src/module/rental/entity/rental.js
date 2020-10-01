@@ -30,11 +30,11 @@ module.exports = class Rental {
         /**
          * @type {import('../../customer/entity/customer');} this.Customer
          */
-        this.Customer = customer;
+        this.customer = customer;
         /**
          * @type {import('../../car/entity/car');} this.Car
          */
-        this.Car = car;
+        this.car = car;
     }
 
     convertDateToString(date) {

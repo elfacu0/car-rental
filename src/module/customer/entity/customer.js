@@ -1,3 +1,4 @@
+const Rental = require('../../rental/entity/rental');
 module.exports = class Customer {
     constructor({
         id,
@@ -11,6 +12,7 @@ module.exports = class Customer {
         email,
         birthDate,
         isDeleted,
+        rentals,
     }) {
         this.id = Number(id);
         this.firstNames = firstNames;
@@ -23,5 +25,6 @@ module.exports = class Customer {
         this.email = email;
         this.birthDate = birthDate;
         this.isDeleted = isDeleted;
+        // this.rentals = rentals.map((rental) => new Rental(rental));
     }
 };

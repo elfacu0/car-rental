@@ -49,15 +49,15 @@ module.exports = class RentalController extends AbstractController {
      */
     async create(req, res) {
         const { id } = req.params;
-        let Car = {};
+        let car = {};
         let rental = {};
         if (id) {
-            Car = await this.carService.getById(id);
+            car = await this.carService.getById(id);
             rental.carId = id;
-            rental.carPricePerDayForInput = Car.price;
-            rental.carPricePerDay = Car.priceInCents;
+            rental.carPricePerDayForInput = car.price;
+            rental.carPricePerDay = car.priceInCents;
         }
-        rental.car = Car;
+        rental.car = car;
         const customers = await this.customerService.getAll();
         res.render('rental/view/form.html', {
             data: { rental, customers },
