@@ -31,8 +31,8 @@ function fromDataToEntity({
         totalPrice,
         paymentType,
         isPaid,
-        customer: new Customer(customer),
-        car: new Car(car),
+        customer: customer ? new Customer(customer) : {},
+        car: car ? new Car(car) : {},
     });
 }
 
