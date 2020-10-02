@@ -80,7 +80,9 @@ function configureSession(container) {
  * @param {DIContainer} container
  */
 function configureCarModel(container) {
-    return CarModel.setup(container.get('Sequelize'));
+    CarModel.setup(container.get('Sequelize'));
+    CarModel.setupAssociations(RentalModel);
+    return CarModel;
 }
 
 /**

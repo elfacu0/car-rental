@@ -45,6 +45,7 @@ module.exports = class CarRepository extends AbstractCarRepository {
     async getById(id) {
         const carModel = await this.carModel.findOne({
             where: { id },
+            include: ['rentals'],
         });
 
         if (!carModel) {

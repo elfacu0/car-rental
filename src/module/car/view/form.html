@@ -1,4 +1,4 @@
-{% extends 'view/layout/base.html' %} {% block body %} {% set car = data.car %}
+{% extends 'view/layout/base.html' %} {% block body %} {% set car = data.car %}{% set rentals = data.car.rentals %}
 
 <div class="level-left">
     <div class="level-item">
@@ -143,4 +143,59 @@
     <span><a class="button is-dark is-large" href="/car">Cancel</a></span>
     <hr />
 </form>
+
+<h1 class="title is-1">Historical Rentals</h1>
+{% for rental in rentals %}
+<div class="columns is-vcentered  ">
+      <div class="column">
+          <div class="content">
+              <p class="subtitle is-5">
+                  <nav class="level">
+
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">Customer Id</p>
+                        <p class="title">{{rental.customerId}}</p>
+                      </div>
+                    </div>
+
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">Start Date</p>
+                        <p class="title">{{rental.startDateForInput}}</p>
+                      </div>
+                    </div>
+
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">End Date</p>
+                        <p class="title">{{rental.endDateForInput}}</p>
+                      </div>
+                    </div>
+
+                    <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">is Paid</p>
+                          <p class="title">
+                            {% if rental.isPaid %}
+                              <i class="fas fa-check"></i>
+                            {% else %}
+                             <i class="fas fa-times"></i>
+                            {% endif %}
+                        </p>
+                        </div>
+                      </div>
+
+                    </nav>
+              </p>
+          </div>
+      </div>
+      <div class="column is-narrow">
+        <div>
+          <a href="/rental/view/{{rental.id}}"><i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+    </div>
+
+{% endfor %}
 {% endblock %}

@@ -1,3 +1,4 @@
+const Rental = require('../../rental/entity/rental');
 module.exports = class Car {
     constructor({
         id,
@@ -11,6 +12,7 @@ module.exports = class Car {
         seats,
         hasAutomaticTransmission,
         priceInCents,
+        rentals,
     }) {
         this.id = id;
         this.imageSrc = imageSrc;
@@ -24,8 +26,16 @@ module.exports = class Car {
         this.hasAutomaticTransmission = hasAutomaticTransmission;
         this.priceInCents = priceInCents;
         this.price = this.centsToDolars(priceInCents);
+        this.rentals = this.mapRentals(rentals);
     }
     centsToDolars(price) {
         return price / 100;
+    }
+    mapRentals(rentals) {
+        let mappedRentals = [];
+        if (rentals) {
+            mappedRentals = rentals.map((rental) => new Rental(rental));
+        }
+        return mappedRentals;
     }
 };
