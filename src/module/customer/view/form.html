@@ -195,17 +195,11 @@ data.customer %} {% set rentals = data.customer.rentals %}
               </p>
           </div>
       </div>
-      {% if admin %}
       <div class="column is-narrow">
         <div>
-            <button class="delete action-delete" data-id="{{rental.id}}" data-name="">
-            </button>
-          </div>
-        <div>
-          <a href="/rental/view/{{rental.id}}"><i class="fas fa-pen"></i></a>
+          <a href="/rental/view/{{rental.id}}"><i class="fas fa-external-link-alt"></i></a>
         </div>
       </div>
-      {% endif %}
     </div>
 
 {% endfor %}
