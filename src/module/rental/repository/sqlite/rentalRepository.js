@@ -13,8 +13,8 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
     }
 
     /**
-     * @param {import('../../entity/customer')} rental
-     * @returns {import('../../entity/customer')}
+     * @param {import('../../entity/rental')} rental
+     * @returns {import('../../entity/rental')}
      */
     async save(rental) {
         let rentalModel;
@@ -26,7 +26,7 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
     }
 
     /**
-     * @param {import('../../entity/club')} rental
+     * @param {import('../../entity/rental')} rental
      * @returns {Boolean} devuelve true si se borró algo, false si no se borró nada.
      */
     async delete(rental) {
