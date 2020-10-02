@@ -30,7 +30,7 @@ function fromDataToEntity({
         endDate,
         totalPrice,
         paymentType,
-        isPaid,
+        isPaid: Boolean(isPaid),
         customer: customer ? new Customer(customer) : {},
         car: car ? new Car(car) : {},
     });

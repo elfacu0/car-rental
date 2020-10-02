@@ -87,7 +87,9 @@ function configureCarModel(container) {
  * @param {DIContainer} container
  */
 function configureCustomerModel(container) {
-    return CustomerModel.setup(container.get('Sequelize'));
+    CustomerModel.setup(container.get('Sequelize'));
+    CustomerModel.setupAssociations(RentalModel);
+    return CustomerModel;
 }
 
 /**

@@ -65,7 +65,9 @@ module.exports = class CustomerController extends AbstractController {
 
         try {
             const customer = await this.customerService.getById(id);
-            res.render('customer/view/form.html', { data: { customer } });
+            res.render('customer/view/form.html', {
+                data: { customer },
+            });
         } catch (e) {
             req.session.errors = [e.message];
             res.redirect(this.ROUTE_BASE);

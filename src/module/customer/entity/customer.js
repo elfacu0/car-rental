@@ -14,6 +14,10 @@ module.exports = class Customer {
         isDeleted,
         rentals,
     }) {
+        let mappedRentals = [];
+        if (rentals) {
+            mappedRentals = rentals.map((rental) => new Rental(rental));
+        }
         this.id = Number(id);
         this.firstNames = firstNames;
         this.lastNames = lastNames;
@@ -25,6 +29,6 @@ module.exports = class Customer {
         this.email = email;
         this.birthDate = birthDate;
         this.isDeleted = isDeleted;
-        // this.rentals = rentals.map((rental) => new Rental(rental));
+        this.rentals = mappedRentals;
     }
 };

@@ -1,5 +1,5 @@
 {% extends 'view/layout/base.html' %} {% block body %} {% set customer =
-data.customer %} {% set rentals = data.rentals %}
+data.customer %} {% set rentals = data.customer.rentals %}
 
 <div class="level-left">
     <div class="level-item">
@@ -150,7 +150,65 @@ data.customer %} {% set rentals = data.rentals %}
 </form>
 
 <h1 class="title is-1">Historical Rentals</h1>
-{% for rental in rentals %} {% endfor %}
+{% for rental in rentals %}
+<div class="columns is-vcentered  ">
+      <div class="column">
+          <div class="content">
+              <p class="subtitle is-5">
+                  <nav class="level">
+
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">Car Id</p>
+                        <p class="title">{{rental.carId}}</p>
+                      </div>
+                    </div>
+
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">Start Date</p>
+                        <p class="title">{{rental.startDateForInput}}</p>
+                      </div>
+                    </div>
+
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="heading">End Date</p>
+                        <p class="title">{{rental.endDateForInput}}</p>
+                      </div>
+                    </div>
+
+                    <div class="level-item has-text-centered">
+                        <div>
+                          <p class="heading">is Paid</p>
+                          <p class="title">
+                            {% if rental.isPaid %}
+                              <i class="fas fa-check"></i>
+                            {% else %}
+                             <i class="fas fa-times"></i>
+                            {% endif %}
+                        </p>
+                        </div>
+                      </div>
+
+                    </nav>
+              </p>
+          </div>
+      </div>
+      {% if admin %}
+      <div class="column is-narrow">
+        <div>
+            <button class="delete action-delete" data-id="{{rental.id}}" data-name="">
+            </button>
+          </div>
+        <div>
+          <a href="/rental/view/{{rental.id}}"><i class="fas fa-pen"></i></a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+{% endfor %}
 
 <script src="/public/js/customer.form.nationality.js"></script>
 {% endblock %}

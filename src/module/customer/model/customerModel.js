@@ -66,4 +66,15 @@ module.exports = class CustomerModel extends Model {
 
         return CustomerModel;
     }
+
+    /**
+     *
+     * @param {import('../../rental/model/rentalModel')} RentalModel
+     */
+    static setupAssociations(RentalModel) {
+        CustomerModel.hasMany(RentalModel, {
+            foreignKey: 'customerId',
+            as: 'rentals',
+        });
+    }
 };

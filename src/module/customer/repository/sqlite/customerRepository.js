@@ -52,8 +52,8 @@ module.exports = class CustomerRepository extends AbstractCustomerRepository {
     async getById(id) {
         const customerModel = await this.customerModel.findOne({
             where: { id },
+            include: ['rentals'],
         });
-
         if (!customerModel) {
             throw new CustomerNotFoundError(`customer with ${id} not found`);
         }
