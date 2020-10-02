@@ -304,6 +304,9 @@ data.rental %}{% set car = data.rental.car %}{% set customer = data.rental.custo
     <span><a class="button is-dark is-large" href="/rental">Cancel</a></span>
     <hr />
 </form>
+
+{% if rental.id == undefined %}
 <script src="/public/js/rental.form.search.js"></script>
+{% endif %}
 <script src="/public/js/rental.form.js"></script>
 {% endblock %}
