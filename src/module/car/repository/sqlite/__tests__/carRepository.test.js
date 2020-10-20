@@ -4,6 +4,8 @@ const CarModel = require('../../../model/carModel');
 const CarEntity = require('../../../entity/car');
 const CarNotFoundError = require('../../error/carNotFoundError');
 const CarIdNotDefinedError = require('../../error/carIdNotDefinedError');
+const RentalModel = require('../../../../rental/model/rentalModel');
+const CustomerModel = require('../../../../customer/model/customerModel');
 
 const sequelizeInstance = new Sequelize('sqlite::memory');
 
@@ -29,6 +31,12 @@ const sampleCar = new CarEntity({
 
 beforeAll(() => {
     const car = CarModel.setup(sequelizeInstance);
+    const rental = RentalModel.setup(sequelizeInstance);
+    CustomerModel.setup(sequelizeInstance);
+    car.hasMany(rental, {
+        foreignKey: 'carId',
+        as: 'rentals',
+    });
     repository = new CarRepository(car);
 });
 

@@ -18,10 +18,6 @@ module.exports = class CarController extends AbstractController {
      */
     configureRoutes(app) {
         const ROUTE = this.ROUTE_BASE;
-
-        // Nota: el `bind` es necesario porque estamos atando el callback a una función miembro de esta clase
-        // y no a la clase en si.
-        // Al hacer `bind` nos aseguramos que "this" dentro de `create` sea el controlador.
         app.get(`${ROUTE}/create`, this.create.bind(this));
         app.get(`${ROUTE}`, this.index.bind(this));
         app.get(`${ROUTE}/view/:id`, this.view.bind(this));

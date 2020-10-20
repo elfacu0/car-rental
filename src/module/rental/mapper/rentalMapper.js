@@ -21,6 +21,8 @@ function fromDataToEntity({
     car,
 }) {
     const totalPrice = 0;
+    const customerAux = customer || {};
+    const carAux = car || {};
     return new Rental({
         id: Number(id),
         carId: Number(carId),
@@ -31,8 +33,8 @@ function fromDataToEntity({
         totalPrice,
         paymentType,
         isPaid: Boolean(isPaid),
-        customer: customer ? new Customer(customer) : {},
-        car: car ? new Car(car) : {},
+        customer: customerAux.id ? new Customer(customer) : {},
+        car: carAux.id ? new Car(car) : {},
     });
 }
 

@@ -44,6 +44,9 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
      * @returns {import('../../entity/rental')}
      */
     async getById(id) {
+        if (!id) {
+            throw new RentalIdNotDefinedError();
+        }
         const rentalModel = await this.rentalModel.findOne({
             where: { id },
             include: ['car', 'customer'],
@@ -60,7 +63,6 @@ module.exports = class CustomerRepository extends AbstractRentalRepository {
      */
     async getAll() {
         const rentals = await this.rentalModel.findAll();
-        console.log(rentals);
         return rentals.map(fromModelToEntity);
     }
 };

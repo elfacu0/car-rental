@@ -56,8 +56,8 @@ module.exports = class RentalController extends AbstractController {
             rental.carId = id;
             rental.carPricePerDayForInput = car.price;
             rental.carPricePerDay = car.priceInCents;
+            rental.car = car;
         }
-        rental.car = car;
         const customers = await this.customerService.getAll();
         res.render('rental/view/form.html', {
             data: { rental, customers },

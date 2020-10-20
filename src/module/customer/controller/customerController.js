@@ -17,10 +17,6 @@ module.exports = class CustomerController extends AbstractController {
      */
     configureRoutes(app) {
         const ROUTE = this.ROUTE_BASE;
-
-        // Nota: el `bind` es necesario porque estamos atando el callback a una función miembro de esta clase
-        // y no a la clase en si.
-        // Al hacer `bind` nos aseguramos que "this" dentro de `create` sea el controlador.
         app.get(`${ROUTE}/create`, this.create.bind(this));
         app.get(`${ROUTE}`, this.index.bind(this));
         app.get(`${ROUTE}/view/:id`, this.view.bind(this));
@@ -80,7 +76,6 @@ module.exports = class CustomerController extends AbstractController {
      */
     async save(req, res) {
         try {
-            console.log(req.body);
             const customer = fromDataToEntity(req.body);
             const savedCustomer = await this.customerService.save(customer);
             if (customer.id) {
